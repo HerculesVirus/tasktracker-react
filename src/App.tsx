@@ -1,25 +1,30 @@
-import React from 'react';
+import React , {FC} from 'react';
+import { BrowserRouter as Router , Navigate, Route, Routes } from 'react-router-dom';
+import CreateTask from './views/Task/Create';
+import ListOfTask from './views/Task/List';
+import BulkDelete from './views/Task/BulkDelete';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App: FC = ()=> {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <Router>
+          <Routes>
+            <Route  
+            path="/" 
+            element={<Navigate to="/list-tasks" replace />}
+            />
+            <Route  path="/list-tasks" element={<ListOfTask />} />
+            <Route  path="/create-task" element={<CreateTask />}/>
+            <Route  path="/bulk-delete" element={<BulkDelete />} />
+            {/* <Route  path="/" element={<CreateTask />}/> */}
+          </Routes>
+        </Router>
+      </div>
+    </>
+
   );
 }
 
